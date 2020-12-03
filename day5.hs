@@ -34,3 +34,18 @@ countNice :: [String] -> Int
 countNice items = length $ filter isNice items
 
 part1 = countNice day5
+
+
+pairRepeat (a:b:rest) = isInfixOf [a,b] rest
+pairRepeat _ = False
+
+hasPairRepeat s = isJust (find pairRepeat (tails s))
+
+oneRepeat (a:_:c:_) = a == c
+oneRepeat _ = False
+
+hasOneRepeat s = isJust (find oneRepeat (tails s))
+
+isNice2 s = hasPairRepeat s && hasOneRepeat s
+
+part2 = length $ filter isNice2 day5
